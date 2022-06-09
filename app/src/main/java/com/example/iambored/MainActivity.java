@@ -2,8 +2,14 @@ package com.example.iambored;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -12,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Random;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,8 +44,13 @@ public class MainActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         Gson gson = new Gson();
 
-        String url = "https://www.boredapi.com/api/activity";
+        Button btn = findViewById(R.id.button);
+        Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        btn.setBackgroundColor(color);
 
+        String url = "https://www.boredapi.com/api/activity";
+        result.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
         Request request = new Request.Builder()
                 .url(url)
                 .build();
